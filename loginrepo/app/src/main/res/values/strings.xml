@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LoginAndSignup</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="parse_app_id">HrL4uZF4bbGMEyVuTyduLW4fVphkzreulp2vN0lh</string>
+    <string name="parse_client_key">IkbTacYj6JFSJmaWX0ATVc0lvD5FUGwics5PolPV</string>
+    <string name="login_label">No account yet ? <b><u>Create one</u></b></string>
+    <string name="signup_label">Already a member? <b><u>Login</u></b></string>
+</resources>
