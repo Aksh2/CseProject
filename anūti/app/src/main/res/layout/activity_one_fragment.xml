@@ -1,16 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="project.cse.anti.fragments">
-    <TextView
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:fitsSystemWindows="true"
+   tools:context="project.cse.anti.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:divider="@color/colorPrimaryDark"
+        android:dividerHeight="1px"/>
+
+    <!--<include layout="@layout/content"/>-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        app:backgroundTint="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Data Collection Activity Goes Here"
-        android:textSize="40dp"
-        android:layout_centerInParent="true"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
 
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/ic_person_add"/>
 
 </RelativeLayout>

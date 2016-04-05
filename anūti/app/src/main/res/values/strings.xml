@@ -3,4 +3,6 @@
     <string name="title_activity_one_fragment">OneFragment</string>
     <string name="Location">User Location Activity goes here</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_add_contact">addContact</string>
+    <string name="emergencyMessage">Hi,I am in an emergency. I need help as soon as possible. Please follow my Location:</string>
 </resources>
