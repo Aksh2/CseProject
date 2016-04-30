@@ -15,7 +15,15 @@ android:fitsSystemWindows="true"
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content"/>
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="1dp"/>
+
+    <!--<include layout="@layout/content"/>-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
