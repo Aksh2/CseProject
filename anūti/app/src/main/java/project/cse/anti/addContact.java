@@ -3,6 +3,7 @@ package project.cse.anti;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -35,6 +36,7 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import project.cse.anti.fragments.OneFragment;
 
@@ -46,6 +48,7 @@ public class addContact extends AppCompatActivity {
     private Button saveButton;
     private EditText mName,mPhone,mMessage;
     String[] names={};
+    private boolean defaultMessage=true;
     ArrayList<String> listNames = new ArrayList<String>();
 
 
@@ -81,12 +84,14 @@ public class addContact extends AppCompatActivity {
                 if(!isChecked){
                     message.setVisibility(View.VISIBLE);
                     messageLabel.setVisibility(View.GONE);
+                    defaultMessage=false;
 
                 }
                 else
                 {
                     message.setVisibility(View.GONE);
                     messageLabel.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -113,49 +118,43 @@ public class addContact extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*GlobalClass global = new GlobalClass();
-                global.names.add(mName.getText().toString());
-                */
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.setPackage("com.whatsapp");
-
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Hare Krishna, My First Msg on Whatsapp");
-                sendIntent.setType("text/plain");
-                startActivity(sendIntent);
-
-                ContactsDB contacts = new ContactsDB();
-                contacts.setName(mName.getText().toString());
-                contacts.setMessage(mMessage.getText().toString());
-                contacts.setNumber(mPhone.getText().toString());
-                Toast.makeText(getApplicationContext(),contacts.getName(),Toast.LENGTH_LONG).show();
-                contacts.pinInBackground("SaveContacts", new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if(isFinishing()){
-                            return;
-                        }
-                        if (e==null){
-                            setResult(Activity.RESULT_OK);
-                            finish();
-                        }
-                        else
-                        {
-                            Toast.makeText(getApplicationContext(),"Error Saving:"+e.getMessage(),Toast.LENGTH_LONG).show();
-                        }
-
+                if (validate()) {
+                    ContactsDB contacts = new ContactsDB();
+                    contacts.setName(mName.getText().toString());
+                    if (defaultMessage) {
+                        String Message = getResources().getString(R.string.emergencyMessage);
+                        contacts.setMessage(Message);
+                    } else {
+                        contacts.setMessage(mMessage.getText().toString());
                     }
-                });
+                    contacts.setNumber(mPhone.getText().toString());
+                    Toast.makeText(getApplicationContext(), contacts.getMessage(), Toast.LENGTH_LONG).show();
+                    contacts.pinInBackground("SaveContacts", new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (isFinishing()) {
+                                return;
+                            }
+                            if (e == null) {
+                                setResult(Activity.RESULT_OK);
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Error Saving:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
 
-                //listNames.add(mName.getText().toString());
-                //adapter.notifyDataSetChanged();
-                //Intent intent = new Intent(getApplicationContext(), OneFragment.getA);
+                        }
+                    });
 
-                //String[]names = new String[listNames.size()];
-                //listNames.toArray(names);
 
-                //intent.putExtra("Nameslist", listNames);
-                //startActivity(intent);
+                    //listNames.add(mName.getText().toString());
+                    //adapter.notifyDataSetChanged();
+                    //Intent intent = new Intent(getApplicationContext(), OneFragment.getA);
+
+                    //String[]names = new String[listNames.size()];
+                    //listNames.toArray(names);
+
+                    //intent.putExtra("Nameslist", listNames);
+                    //startActivity(intent);
 
                 /*
                 ContactDatabase contact = new ContactDatabase();
@@ -172,8 +171,7 @@ public class addContact extends AppCompatActivity {
                 contact.save();*/
 
 
-
-
+                }
             }
         });
 
@@ -202,6 +200,30 @@ public class addContact extends AppCompatActivity {
 
             }
         });*/
+    }
+
+    public boolean validate(){
+        boolean valid = true;
+        final String PHONE_RE = "\\d{10}";
+        if(mPhone.getText().toString().isEmpty()||mPhone.getText().toString().length()<10||!Pattern.matches(PHONE_RE, mPhone.getText().toString())){
+            mPhone.setError("Enter a valid 10 digit phone number excluding +91");
+            valid= false;
+        }
+        else
+        {
+            mPhone.setError(null);
+        }
+        if(mName.getText().toString().isEmpty()){
+            mName.setError("Please Enter a valid name");
+            valid= false;
+        }
+        else
+        {
+            mName.setError(null);
+        }
+
+
+        return valid;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

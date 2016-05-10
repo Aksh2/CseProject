@@ -1,82 +1,51 @@
 package project.cse.anti.fragments;
 
 
-import android.app.ListFragment;
-import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import project.cse.anti.ContactDatabase;
 //import project.cse.anti.MyCustomAdapter;
 import project.cse.anti.ContactsDB;
-import project.cse.anti.GlobalClass;
-import project.cse.anti.MyCustomAdapter;
 import project.cse.anti.ParseAdapter;
 import project.cse.anti.R;
 import project.cse.anti.addContact;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.activeandroid.query.Select;
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseException;
-import com.parse.ParseObject;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
-import com.parse.ParseUser;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.content.Intent.getIntent;
-
 
 
 public class OneFragment extends Fragment {
-    private static final String PARSE_APPLICATION_ID="HrL4uZF4bbGMEyVuTyduLW4fVphkzreulp2vN0lh";
-    private static final String PARSE_CLIENT_KEY="IkbTacYj6JFSJmaWX0ATVc0lvD5FUGwics5PolPV";
 
-    //String[] names={"Please add contacts","Hyagriva"};
+
     // Layout Inflation for the parseAdapter
     private LayoutInflater inflater;
     private ParseQueryAdapter<ContactsDB> contactsAdapter;
+    int EDIT_ACTIVITY_CODE=10;
 
     FloatingActionButton fab;
+    ListView lv;
     public OneFragment(){
         //Required empty constructor
     }
+
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 
          View rootView = inflater.inflate(R.layout.activity_one_fragment, container, false);
 
-        //Enabling the parse local database
-        //Parse.enableLocalDatastore(getActivity());
-        //Registering the parseObject class
-        //ParseObject.registerSubclass(ContactsDB.class);
-        // Initialising parse
-        //Parse.initialize(getActivity(), PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
-        // Enabling anonymous user login into parse
-        //ParseUser.enableAutomaticUser();
-        //ParseACL defaultACL = new ParseACL();
-        //ParseACL.setDefaultACL(defaultACL, true);
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        ListView lv = (ListView)rootView.findViewById(R.id.listView1);
+        lv = (ListView)rootView.findViewById(R.id.listView1);
 
 
 
@@ -123,7 +92,15 @@ public class OneFragment extends Fragment {
         //inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         contactsAdapter = new ParseAdapter(getActivity(),factory);
 
+
         lv.setAdapter(contactsAdapter);
+       /* lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            ContactsDB contacts = contactsAdapter.getItem(position);
+                modifyContacts(contacts);
+            }
+        });*/
         //contactsAdapter.notifyDataSetChanged();
         /*try {
             Toast.makeText(getActivity(), "is the database empty" + isEmpty("ContactsDB"), Toast.LENGTH_LONG).show();
@@ -133,7 +110,20 @@ public class OneFragment extends Fragment {
         return rootView;
     }
 
+    /*private void modifyContacts(ContactsDB contactsDB){
+        Intent i = new Intent(getActivity().NewContacts.class);
+        i.putExtra("ID",contactsDB.getUuidString());
+        startActivityForResult(i,EDIT_ACTIVITY_CODE);
+    }*/
 
+   public void onResume(){
+        super.onResume();
+
+            if(contactsAdapter == null)
+                lv.setAdapter(contactsAdapter);
+            else
+               contactsAdapter.loadObjects();
+    }
 
     /*public boolean isEmpty(String className) throws ParseException {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(className);

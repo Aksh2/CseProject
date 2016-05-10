@@ -7,4 +7,10 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="darkIron">#656E75</color>
+    <color name="primary">#E43F3F</color>
+    <color name="primary_dark">#E12929</color>
+    <color name="primary_darker">#CC1D1D</color>
+    <color name="accent">#FFFFFF</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
 </resources>

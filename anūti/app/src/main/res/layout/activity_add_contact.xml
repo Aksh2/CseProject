@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/phoneLabel"
             style="@style/styleEditText"
+            android:maxLength="10"
             android:inputType="phone" />
 
            <TextView

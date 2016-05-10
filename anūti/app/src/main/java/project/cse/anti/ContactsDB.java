@@ -1,6 +1,7 @@
 package project.cse.anti;
 
 import com.parse.ParseClassName;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -48,10 +49,10 @@ public class ContactsDB extends ParseObject{
             put("uuid",uuid.toString());
         }
 
-        public void setLocation(double xcord,double ycord)
+        public void setLocation(ParseGeoPoint value)
         {
-            put("xcord",xcord);
-            put("ycord",ycord);
+            put("Location",value);
+
         }
 
         public String getLocation(){

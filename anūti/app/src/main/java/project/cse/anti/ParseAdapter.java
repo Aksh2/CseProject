@@ -37,10 +37,9 @@ public class ParseAdapter extends ParseQueryAdapter<ContactsDB> {
                 else{
                     holder =(ViewHolder) view.getTag();
                 }
-                storedContacts = new ContactsDB();
+                //storedContacts = new ContactsDB();
 
                 TextView contactName = holder.mnameTv;
-                //Log.d("contactname", contacts.getName() );
                  contactName.setText(contact.getName());
                 holder.mMessageTv.setText(contact.getMessage());
                 holder.mNumberTv.setText(contact.getNumber());
