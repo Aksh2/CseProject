@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/akshay/anuti/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/anuti_logo1.png",
+        "source": "/home/akshay/anuti/app/src/main/res/mipmap-mdpi/anuti_logo1.png"
+    },
+    {
+        "merged": "/home/akshay/anuti/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/ic_launcher.png",
+        "source": "/home/akshay/anuti/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    }
+]

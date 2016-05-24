@@ -1,6 +1,8 @@
 package project.cse.anti.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -94,13 +96,35 @@ public class OneFragment extends Fragment {
 
 
         lv.setAdapter(contactsAdapter);
-       /* lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            ContactsDB contacts = contactsAdapter.getItem(position);
-                modifyContacts(contacts);
-            }
-        });*/
+
+       lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ContactsDB contacts;
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                contacts = contactsAdapter.getItem(position);
+               DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener(){
+
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+
+                       switch (which){
+                           case DialogInterface.BUTTON_POSITIVE:
+
+                               contacts.deleteEventually();
+                               contactsAdapter.loadObjects();
+                               break;
+                           case DialogInterface.BUTTON_NEGATIVE:
+                               break;
+                       }
+                   }
+               };
+               AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+               builder.setMessage("Are you sure you want to delete?").setPositiveButton("Yes",dialogClickListener).setNegativeButton("No",dialogClickListener).show();
+
+
+           }
+       });
+        contactsAdapter.loadObjects();
         //contactsAdapter.notifyDataSetChanged();
         /*try {
             Toast.makeText(getActivity(), "is the database empty" + isEmpty("ContactsDB"), Toast.LENGTH_LONG).show();

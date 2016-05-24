@@ -91,6 +91,7 @@ public class addContact extends AppCompatActivity {
                 {
                     message.setVisibility(View.GONE);
                     messageLabel.setVisibility(View.VISIBLE);
+                    defaultMessage=true;
 
                 }
             }

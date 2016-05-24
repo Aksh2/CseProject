@@ -104,10 +104,13 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.setPackage("com.whatsapp");
 
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.emergencyMessage)+"\n"+url);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.emergencyMessage) + "\n" + url);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
 
+                ParseUser user = ParseUser.getCurrentUser();
+                user.put("location",url);
+                user.saveInBackground();
 
                 Log.i("accelerometer","Device shaken");
                /* try {
