@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	
+	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+
+	<link href="Styles/bootstrap.min.css" rel="stylesheet" />
+
+	<style>
+	body{
+		padding-top: 70px;
+		background: #eee;
+		
+	}
+	.glyphicon {
+		font-size: 100px;
+		margin-top: 45px;
+	}
+	.center{
+		text-align: center;
+	}
+
+	</style>
+
+	<title>User Tracker</title>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<div class="container-fluid ">
+	<div style="position:relative;">
+		<nav class="navbar navbar-default navbar-static navbar-fixed-top" role="navigation" id="navbar-spy">
+			
+				
+				<div class="navbar-header">
+					<a href="index.html" class="navbar-brand" margin-bottom="10px">
+						<img src="images/logo.png" class="imagealign" width="55"  >
+					</a>
+					<a href="index.html" class="navbar-brand center" >
+						User Tracker
+					</a>
+
+
+					
+
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+						<span class="sr-only">Navigation toggle</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>	
+					</button>
+
+				</div>
+				<!--
+				<div class="collapse navbar-collapse" id="navigation">
+					<ul class="nav navbar-nav"  role="menu">
+						<li class="active"><a href="#about" >About Us</a></li>
+						<li><a href="#alumni">Alumni</a></li>
+						<li><a href="#facilities">Facilities</a></li>					
+						<li><a href="#">Careers</a></li>
+						<li><a href="#">Contact Us</a></li>
+					</ul>
+				</div>
+			-->
+		</nav>
+		<script type="text/javascript">
+    Parse.initialize("HrL4uZF4bbGMEyVuTyduLW4fVphkzreulp2vN0lh", "1GjHRDpesKRPazBsxWnylXutQcmVBdmDMCdt8T8d");
+    
+    
+  </script>
+
+		
+				<!--	<div class="jumbotron"> -->
+				<!--</div >-->	
+		
+		<table class="table table-hover " id="mytable">
+			<thead >
+			<tr>
+				<th>Name</th>
+				<th>Phone </th>
+				<th>Email</th>
+				<th>Location</th>
+			</tr>
+			</thead>
+			<tbody >
+			
+				<script type="text/javascript">
+				var User = Parse.Object.extend("User");
+				var query = new Parse.Query(User);
+				var html="";
+				var number = [];
+				query.notEqualTo("username"," ");
+				query.find({
+					success: function(results){
+						
+						//document.write('<table class="table table-hover "><thead ><tr><th>Name</th><th>Phone </th><th>Email</th><th>Location</th></tr></thead><tbody >');
+						for (var i = 0; i < results.length; i++) {
+							var object = results[i];
+
+							//number[i]=object.get('username'));
+							//document.write("<tr><td></td><td>"+number[i]+"<td></td><td></td>");
+							(function($){
+								$('#mytable').append('<tr><td>' + object.get('name')+'</td><td>'+object.get('username')+'</td><td>'+object.get('email')+'</td><td>'+object.get('location')+'</td></tr>');
+
+							})(jQuery);
+
+						}
+					},
+					error: function(error){
+						alert("error"+error.code+""+error.message);
+					}
+		
+
+				});
+				
+				</script>
+				<!--
+				<tr>
+					<td>Name 1</td>
+					<td>Phone 1</td>
+					<td>Email 1</td>
+					<td>Location 1</td>
+				</tr>
+				<tr>
+					<td>Name 2</td>
+					<td>Phone 2</td>
+					<td>Email 2</td>
+					<td>Location 2</td>
+				</tr>
+			</tbody>
+		</table>
+		-->
+		</div>
+	</div>	
+</div>	
+
+				
+	
+	<script src="Scripts/jquery-2.1.4.min.js"></script>
+	<script src="Scripts/bootstrap.min.js"></script>
+</body>
+</html>
